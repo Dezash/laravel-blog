@@ -23,6 +23,10 @@
                     <x-jet-nav-link href="{{ route('queue') }}" :active="request()->routeIs('queue')">
                         Straipsnių eilė
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
+                        Vartotojai
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -130,7 +134,15 @@
             </x-jet-responsive-nav-link>
 
             <x-jet-responsive-nav-link href="{{ route('blogadmin') }}" :active="request()->routeIs('blogadmin')">
-                Staipsnių valdiklis
+                Straipsnių valdiklis
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('queue') }}" :active="request()->routeIs('queue')">
+                Straipsnių eilė
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
+                Vartotojai
             </x-jet-responsive-nav-link>
         </div>
 

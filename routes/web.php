@@ -6,6 +6,7 @@ use App\Http\Livewire\Blogs;
 use App\Http\Livewire\PostBlog;
 use App\Http\Livewire\EditBlog;
 use App\Http\Livewire\BlogQueue;
+use App\Http\Livewire\UserList;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::get('blog/post', PostBlog::class)->name('postblog');
 Route::get('blog/edit/{id}', EditBlog::class)->name('editblog');
 Route::get('blog/queue', BlogQueue::class)->name('queue');
 //Route::post('blog', CreateBlog::class);
+
+Route::get('/userlist', UserList::class)->name('userlist');
