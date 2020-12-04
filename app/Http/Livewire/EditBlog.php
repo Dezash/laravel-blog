@@ -24,6 +24,8 @@ class EditBlog extends Component
         'category_id' => 'required|numeric'
     ];
 
+    protected $listeners = ['keywordRemoved', 'refreshed' => '$refresh'];
+
     public function save()
     {
         $this->validate();
@@ -35,13 +37,10 @@ class EditBlog extends Component
             'nature' => $this->nature
         ]);
 
-        foreach($this->keywords as $keyword)
-        {
+        foreach ($this->keywords as $keyword) {
             $exists = false;
-            foreach($this->blog->keywords as $blogKeyword)
-            {
-                if($blogKeyword->name == $keyword)
-                {
+            foreach ($this->blog->keywords as $blogKeyword) {
+                if ($blogKeyword->name == $keyword) {
                     $exists = true;
                     break;
                 }
@@ -56,6 +55,20 @@ class EditBlog extends Component
             ]);
         }
 
+        foreach ($this->blog->keywords as $blogKeyword) {
+            $exists = false;
+            foreach ($this->keywords as $keyword) {
+                if ($blogKeyword->name == $keyword) {
+                    $exists = true;
+                    break;
+                }
+            }
+
+            if (!$exists) {
+                $blogKeyword->delete();
+            }
+        }
+
         return redirect()->route('blog');
     }
 
@@ -66,8 +79,7 @@ class EditBlog extends Component
         $this->body = $this->blog->body;
         $this->category_id = $this->blog->category->id;
         $this->nature = $this->blog->nature;
-        foreach($this->blog->keywords as $keyword)
-        {
+        foreach ($this->blog->keywords as $keyword) {
             array_push($this->keywords, $keyword->name);
         }
     }
@@ -81,6 +93,22 @@ class EditBlog extends Component
 
     public function addKeyword()
     {
-        array_push($this->keywords, $this->inputKeyword);
+        if ($this->inputKeyword && !empty($this->inputKeyword))
+        {
+            if(!in_array($this->inputKeyword, $this->keywords))
+                array_push($this->keywords, $this->inputKeyword);
+            
+            $this->inputKeyword = "";   
+        }
+    }
+
+    public function keywordRemoved($keywordTitle)
+    {
+        $index = array_search($keywordTitle, $this->keywords);
+        if ($index !== false)
+        {
+            unset($this->keywords[$index]);
+            $this->emitSelf('refreshed');
+        }
     }
 }

@@ -31,7 +31,7 @@
 
             <div class="mt-4">
                 <x-jet-label for="keyword-search" value="Raktažodžiai" />
-                <x-jet-input wire:keydown.enter="addKeyword" wire:model="inputKeyword" id="keyword-search" class="block mt-1 w-full" name="keyword-search" />
+                <x-jet-input wire:keydown.enter.prevent="addKeyword" wire:model="inputKeyword" id="keyword-search" class="block mt-1 w-full" name="keyword-search" />
             </div>
 
             @foreach($keywords as $keyword)
