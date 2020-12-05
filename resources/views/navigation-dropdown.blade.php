@@ -30,6 +30,16 @@
                 </div>
             </div>
 
+            
+            @guest
+            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <x-jet-nav-link align="right" href="{{ route('login') }}" :active="request()->routeIs('login')">
+                    Prisijungti
+                </x-jet-nav-link>
+            </div>
+            @endguest
+
+            @auth
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-jet-dropdown align="right" width="48">
@@ -123,6 +133,7 @@
                     </svg>
                 </button>
             </div>
+            @endauth
         </div>
     </div>
 
@@ -144,8 +155,15 @@
             <x-jet-responsive-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
                 Vartotojai
             </x-jet-responsive-nav-link>
+
+            @guest
+            <x-jet-responsive-nav-link href="{{ route('login') }}">
+                Prisijungti
+            </x-jet-responsive-nav-link>
+            @endguest
         </div>
 
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
@@ -212,5 +230,6 @@
                 @endif
             </div>
         </div>
+        @endauth
     </div>
 </nav>
