@@ -24,6 +24,7 @@
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 w-20">Nr.</th>
                         <th class="px-4 py-2">Antraštė</th>
+                        <th class="px-4 py-2">Autorius</th>
                         <th class="px-4 py-2">Statusas</th>
                         <th class="px-4 py-2">Veiksmai</th>
                     </tr>
@@ -33,6 +34,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $blog->id }}</td>
                         <td class="border px-4 py-2">{{ $blog->title }}</td>
+                        <td class="border px-4 py-2">{{ $blog->author ? $blog->author->name : 'Autoriaus sistemoje nebėra' }}</td>
                         <td class="border px-4 py-2">{{ $blog->state == "SUBMITTED" ? 'Recenzuojamas' : ($blog->state == "APPROVED" ? 'Patvirtintas' : 'Atmestas') }}</td>
                         <td class="border px-4 py-2">
                         
