@@ -14,6 +14,10 @@ class BlogQueue extends Component
 
     public function render()
     {
+        $user = Auth::user();
+        if (!$user->can('viewQueue', Blog::class))
+            abort(401);
+
         return view('livewire.queue.index', [
             'blogs' => Blog::where('state', 'SUBMITTED')->get()
         ]);
@@ -52,9 +56,15 @@ class BlogQueue extends Component
 
     public function confirm()
     {
+        $blog = Blog::find($this->blog_id);
+
+        $user = Auth::user();
+        if (!$user->can('confirm', $blog))
+            abort(401);
+
         if ($this->isApproved)
         {
-            Blog::find($this->blog_id)->update([
+            $blog->update([
                 'reviewer_id' => Auth::id(),
                 'state' => 'APPROVED'
             ]);
@@ -62,7 +72,7 @@ class BlogQueue extends Component
         }
         else
         {
-            Blog::find($this->blog_id)->update([
+            $blog->update([
                 'reviewer_id' => Auth::id(),
                 'state' => 'REJECTED'
             ]);

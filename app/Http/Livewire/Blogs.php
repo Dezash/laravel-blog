@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Blog;
 use App\Models\Category;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Blogs extends Component
 {

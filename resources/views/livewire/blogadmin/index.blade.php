@@ -35,8 +35,9 @@
                         <td class="border px-4 py-2">{{ $blog->title }}</td>
                         <td class="border px-4 py-2">{{ $blog->state == "SUBMITTED" ? 'Recenzuojamas' : ($blog->state == "APPROVED" ? 'Patvirtintas' : 'Atmestas') }}</td>
                         <td class="border px-4 py-2">
-                        <button wire:click="edit({{ $blog->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Redaguoti</button>
-                            <button wire:click="delete({{ $blog->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Ištrinti</button>
+                        
+                        <button wire:click="edit({{ $blog->id }})" class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"@cannot('update', $blog) disabled @endcannot>Redaguoti</button>
+                        <button wire:click="delete({{ $blog->id }})" class="disabled:opacity-50 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"@cannot('delete', $blog) disabled @endcannot>Ištrinti</button>
                         </td>
                     </tr>
                     @endforeach
