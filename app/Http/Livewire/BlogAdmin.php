@@ -4,11 +4,14 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Blog;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class BlogAdmin extends Component
 {
-    public $blogs, $title, $body, $blog_id;
+    use WithPagination;
+
+    public $title, $body, $blog_id;
     public $isOpen = 0;
 
     public function render()
@@ -17,8 +20,7 @@ class BlogAdmin extends Component
         if (!$user->can('viewList', Blog::class))
             abort(401);
         
-        $this->blogs = Blog::all();
-        return view('livewire.blogadmin.index');
+        return view('livewire.blogadmin.index')->with('blogs', Blog::paginate(10));
     }
 
     public function create()

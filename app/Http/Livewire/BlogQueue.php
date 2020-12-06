@@ -5,10 +5,13 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Blog;
 use App\Models\Message;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class BlogQueue extends Component
 {
+    use WithPagination;
+
     public $messageContent, $blog_id;
     public $isOpen = 0;
     public $isApproved = false;
@@ -20,7 +23,7 @@ class BlogQueue extends Component
             abort(401);
 
         return view('livewire.queue.index', [
-            'blogs' => Blog::where('state', 'SUBMITTED')->get()
+            'blogs' => Blog::where('state', 'SUBMITTED')->paginate(10)
         ]);
     }
 

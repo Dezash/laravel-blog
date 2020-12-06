@@ -45,6 +45,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $blogs->links() }}
         </div>
     </div>
 </div>
