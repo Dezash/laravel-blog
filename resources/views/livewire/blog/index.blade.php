@@ -39,7 +39,7 @@
                     </p>
                     <div>{!! $blog->body !!}</div>
                     
-                    <a href="#" class="uppercase text-gray-800 hover:text-black mt-2">Skaityti toliau <i class="fas fa-arrow-right"></i></a>
+                    <a href="/blog/{{ $blog->id }}" class="uppercase text-gray-800 hover:text-black mt-2">Skaityti toliau <i class="fas fa-arrow-right"></i></a>
                 </div>
             </article>
             @endforeach
