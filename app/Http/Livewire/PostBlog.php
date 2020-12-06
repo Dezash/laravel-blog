@@ -54,6 +54,8 @@ class PostBlog extends Component
 
     public function render()
     {
+        $this->category_id = Category::first()->id;
+
         return view('livewire.blog.create', [
             'categories' => Category::all()
         ]);
