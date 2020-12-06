@@ -16,25 +16,35 @@
                         {{ __('Pagrindinis') }}
                     </x-jet-nav-link>
 
+                    @can('viewList', App\Models\Blog::class)
                     <x-jet-nav-link href="{{ route('blogadmin') }}" :active="request()->routeIs('blogadmin')">
-                        Staipsnių valdiklis
+                        Straipsnių valdiklis
                     </x-jet-nav-link>
+                    @endcan
 
+                    @can('viewQueue', App\Models\Blog::class)
                     <x-jet-nav-link href="{{ route('queue') }}" :active="request()->routeIs('queue')">
                         Straipsnių eilė
                     </x-jet-nav-link>
+                    @endcan
 
+                    @can('view', App\Models\UserList::class)
                     <x-jet-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
                         Vartotojai
                     </x-jet-nav-link>
+                    @endcan
                 </div>
             </div>
 
             
             @guest
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                 <x-jet-nav-link align="right" href="{{ route('login') }}" :active="request()->routeIs('login')">
                     Prisijungti
+                </x-jet-nav-link>
+
+                <x-jet-nav-link href="{{ route('register') }}" :active="request()->routeIs('register')">
+                    Registruotis
                 </x-jet-nav-link>
             </div>
             @endguest
@@ -86,9 +96,11 @@
                             </div>
 
                             <!-- Team Settings -->
+                            @if(count(Auth::user()->allTeams()) !== 0)
                             <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
                                 {{ __('Team Settings') }}
                             </x-jet-dropdown-link>
+                            @endif
 
                             @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                 <x-jet-dropdown-link href="{{ route('teams.create') }}">
@@ -144,17 +156,23 @@
                 {{ __('Pagrindinis') }}
             </x-jet-responsive-nav-link>
 
+            @can('viewList', App\Models\Blog::class)
             <x-jet-responsive-nav-link href="{{ route('blogadmin') }}" :active="request()->routeIs('blogadmin')">
                 Straipsnių valdiklis
             </x-jet-responsive-nav-link>
+            @endcan
 
+            @can('viewQueue', App\Models\Blog::class)
             <x-jet-responsive-nav-link href="{{ route('queue') }}" :active="request()->routeIs('queue')">
                 Straipsnių eilė
             </x-jet-responsive-nav-link>
+            @endcan
 
+            @can('view', App\Models\UserList::class)
             <x-jet-responsive-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
                 Vartotojai
             </x-jet-responsive-nav-link>
+            @endcan
 
             @guest
             <x-jet-responsive-nav-link href="{{ route('login') }}">
@@ -209,9 +227,11 @@
                     </div>
 
                     <!-- Team Settings -->
+                    @if(count(Auth::user()->allTeams()) !== 0)
                     <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
                         {{ __('Team Settings') }}
                     </x-jet-responsive-nav-link>
+                    @endif
 
                     <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
                         {{ __('Create New Team') }}
