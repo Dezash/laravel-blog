@@ -7,6 +7,7 @@ use App\Http\Livewire\PostBlog;
 use App\Http\Livewire\EditBlog;
 use App\Http\Livewire\BlogQueue;
 use App\Http\Livewire\UserList;
+use App\Http\Livewire\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('blog/admin', BlogAdmin::class)->name('blogadmin')->middleware('auth'
 Route::get('blog', Blogs::class)->name('blog');
 Route::get('blog/post', PostBlog::class)->name('postblog')->middleware('auth');
 Route::get('blog/edit/{id}', EditBlog::class)->name('editblog')->middleware('auth');
+Route::get('blog/{id}', Post::class)->name('post')->middleware('auth');
 Route::get('blog/queue', BlogQueue::class)->name('queue')->middleware('auth');
 //Route::post('blog', CreateBlog::class);
 
