@@ -28,7 +28,7 @@
                     </x-jet-nav-link>
                     @endcan
 
-                    @can('view', App\Models\UserList::class)
+                    @can('view', App\Models\User::class)
                     <x-jet-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
                         Vartotojai
                     </x-jet-nav-link>
@@ -168,7 +168,7 @@
             </x-jet-responsive-nav-link>
             @endcan
 
-            @can('view', App\Models\UserList::class)
+            @can('view', App\Models\User::class)
             <x-jet-responsive-nav-link href="{{ route('userlist') }}" :active="request()->routeIs('userlist')">
                 Vartotojai
             </x-jet-responsive-nav-link>
