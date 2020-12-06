@@ -37,6 +37,11 @@ class Blogs extends Component
         else
             $blogs = Blog::where('state', 'APPROVED')->orderByDesc('id')->paginate(5);
 
+        foreach($blogs as $blog)
+        {
+            $blog->body = strlen($blog->body) > 500 ? substr($blog->body, 0, 500)."..." : $blog->body;
+        }
+
         return view('livewire.blog.index', [
             'blogs' => $blogs,
             'categories' => Category::all()
