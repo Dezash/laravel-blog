@@ -19,6 +19,8 @@
             @if($isOpen)
                 @include('livewire.blogadmin.create')
             @endif
+
+            <x-jet-input type="text" class="block mt-1" placeholder="Ieškoti" wire:model="searchTerm" />
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
