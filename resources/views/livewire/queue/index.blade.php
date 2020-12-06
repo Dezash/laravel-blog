@@ -34,9 +34,9 @@
                         <td class="border px-4 py-2">{{ $blog->id }}</td>
                         <td class="border px-4 py-2">{{ $blog->title }}</td>
                         <td class="border px-4 py-2">
-                        <button wire:click="approve({{ $blog->id }}, '{{ $blog->title }}')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Publikuoti</button>
-                        <button wire:click="edit({{ $blog->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Redaguoti</button>
-                        <button wire:click="reject({{ $blog->id }}, '{{ $blog->title }}')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Atmesti</button>
+                        <button wire:click="approve({{ $blog->id }}, '{{ $blog->title }}')" class="disabled:opacity-50 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"@cannot('confirm', $blog) disabled @endcannot>Publikuoti</button>
+                        <button wire:click="edit({{ $blog->id }})" class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"@cannot('update', $blog) disabled @endcannot>Redaguoti</button>
+                        <button wire:click="reject({{ $blog->id }}, '{{ $blog->title }}')" class="disabled:opacity-50 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"@cannot('confirm', $blog) disabled @endcannot>Atmesti</button>
                         </td>
                     </tr>
                     @endforeach

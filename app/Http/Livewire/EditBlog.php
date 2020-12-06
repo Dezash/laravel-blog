@@ -28,6 +28,10 @@ class EditBlog extends Component
 
     public function save()
     {
+        $user = Auth::user();
+        if (!$user->can('update', $this->blog))
+            abort(401);
+
         $this->validate();
 
         $this->blog->update([

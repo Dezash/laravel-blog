@@ -17,6 +17,8 @@ class PostBlog extends Component
     public $keywords = [];
     public $inputKeyword;
 
+    protected $listeners = ['keywordRemoved', 'refreshed' => '$refresh'];
+
     protected $rules = [
         'title' => 'required|min:3',
         'body' => 'required|min:30',
@@ -26,6 +28,10 @@ class PostBlog extends Component
     public function save()
     {
         $this->validate();
+
+        $user = Auth::user();
+        if (!$user->can('create', Blog::class))
+            abort(401);
 
         $article = Blog::create([
             'title' => $this->title,
@@ -55,6 +61,22 @@ class PostBlog extends Component
 
     public function addKeyword()
     {
-        array_push($this->keywords, $this->inputKeyword);
+        if ($this->inputKeyword && !empty($this->inputKeyword))
+        {
+            if(!in_array($this->inputKeyword, $this->keywords))
+                array_push($this->keywords, $this->inputKeyword);
+            
+            $this->inputKeyword = "";   
+        }
+    }
+
+    public function keywordRemoved($keywordTitle)
+    {
+        $index = array_search($keywordTitle, $this->keywords);
+        if ($index !== false)
+        {
+            unset($this->keywords[$index]);
+            $this->emitSelf('refreshed');
+        }
     }
 }

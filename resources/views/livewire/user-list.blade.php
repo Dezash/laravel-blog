@@ -21,8 +21,7 @@
                         <td class="border px-4 py-2">{{ $user->name }}</td>
                         <td class="border px-4 py-2">{{ $user->email }}</td>
                         <td class="border px-4 py-2">
-                        <button wire:click="edit({{ $user->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Redaguoti</button>
-                            <button wire:click="delete({{ $user->id }})" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Pašalinti</button>
+                        <button wire:click="delete({{ $user }})" class="disabled:opacity-50 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"@cannot('delete', $user) disabled @endcannot>Pašalinti</button>
                         </td>
                     </tr>
                     @endforeach

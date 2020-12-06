@@ -10,6 +10,21 @@ class TeamPolicy
 {
     use HandlesAuthorization;
 
+    public $staffTeam;
+
+    public function __construct()
+    {
+        $this->staffTeam = Team::find(1);
+    }
+
+    public function before($user, $ability)
+    {
+        if ($user->belongsToTeam($this->staffTeam) && $user->hasTeamRole($this->staffTeam, 'admin')) 
+        {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -41,7 +56,7 @@ class TeamPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return false;
     }
 
     /**
