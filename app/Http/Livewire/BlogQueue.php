@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Blog;
+use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
 class BlogQueue extends Component
@@ -61,6 +62,12 @@ class BlogQueue extends Component
         $user = Auth::user();
         if (!$user->can('confirm', $blog))
             abort(401);
+
+        $message = Message::create([
+            'user_id' => $blog->author->id,
+            'sender_id' => $user->id,
+            'message' => $this->messageContent
+        ]);
 
         if ($this->isApproved)
         {

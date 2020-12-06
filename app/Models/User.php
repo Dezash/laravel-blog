@@ -57,4 +57,16 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function messagesSent()
+    {
+        return $this->hasMany('App\Models\Message', 'sender_id')->orderByDesc('id')->limit(5);
+    }
+
+
+    public function messagesReceived()
+    {
+        return $this->hasMany('App\Models\Message', 'user_id')->orderByDesc('id')->limit(5);
+    }
 }
