@@ -19,20 +19,18 @@ use App\Http\Livewire\UserList;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Blogs::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard')->middleware('auth');
 
 
-Route::get('blog/admin', BlogAdmin::class)->name('blogadmin');
+Route::get('blog/admin', BlogAdmin::class)->name('blogadmin')->middleware('auth');
 Route::get('blog', Blogs::class)->name('blog');
-Route::get('blog/post', PostBlog::class)->name('postblog');
-Route::get('blog/edit/{id}', EditBlog::class)->name('editblog');
-Route::get('blog/queue', BlogQueue::class)->name('queue');
+Route::get('blog/post', PostBlog::class)->name('postblog')->middleware('auth');
+Route::get('blog/edit/{id}', EditBlog::class)->name('editblog')->middleware('auth');
+Route::get('blog/queue', BlogQueue::class)->name('queue')->middleware('auth');
 //Route::post('blog', CreateBlog::class);
 
-Route::get('/userlist', UserList::class)->name('userlist');
+Route::get('/userlist', UserList::class)->name('userlist')->middleware('auth');
