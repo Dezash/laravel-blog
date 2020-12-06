@@ -12,6 +12,7 @@
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2">Vardas</th>
                         <th class="px-4 py-2">El. paštas</th>
+                        <th class="px-4 py-2">Rolė</th>
                         <th class="px-4 py-2">Veiksmai</th>
                     </tr>
                 </thead>
@@ -20,6 +21,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $user->name }}</td>
                         <td class="border px-4 py-2">{{ $user->email }}</td>
+                        <td class="border px-4 py-2">{{ count($user->allTeams()) === 0 ? 'Autorius' : ($user->hasTeamRole($user->currentTeam, 'admin') ? 'Administratorius' : 'Recenzentas') }}</td>
                         <td class="border px-4 py-2">
                         <button wire:click="delete({{ $user }})" class="disabled:opacity-50 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"@cannot('delete', $user) disabled @endcannot>Pašalinti</button>
                         </td>
