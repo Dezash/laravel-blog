@@ -12,10 +12,33 @@ class Blogs extends Component
 {
     use WithPagination;
 
+    public $cat;
+    public $categoryName;
+
+    protected $queryString = ['cat'];
+
+    public function mount()
+    {
+        if ($this->cat)
+        {
+            $category = Category::where('name', $this->cat)->first();
+            if ($category)
+            {
+                $this->categoryName = $category->name;
+            }
+        }
+    }
+
     public function render()
     {
+        $blogs = null;
+        if ($this->categoryName)
+            $blogs = Blog::join('categories', 'categories.id', '=', 'blogs.category_id')->where('state', 'APPROVED')->where('categories.name', $this->categoryName)->orderByDesc('blogs.id')->paginate(5);
+        else
+            $blogs = Blog::where('state', 'APPROVED')->orderByDesc('id')->paginate(5);
+
         return view('livewire.blog.index', [
-            'blogs' => Blog::where('state', 'APPROVED')->orderByDesc('id')->paginate(5),
+            'blogs' => $blogs,
             'categories' => Category::all()
         ]);
     }
