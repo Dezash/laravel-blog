@@ -20,11 +20,13 @@
             @include('livewire.queue.message')
             @endif
 
+            <x-jet-input type="text" class="block mt-1" placeholder="Ieškoti" wire:model="searchTerm" />
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="bg-gray-100">
                         <th class="px-4 py-2 w-20">Nr.</th>
                         <th class="px-4 py-2">Antraštė</th>
+                        <th class="px-4 py-2">Autorius</th>
                         <th class="px-4 py-2">Veiksmai</th>
                     </tr>
                 </thead>
@@ -33,6 +35,7 @@
                     <tr>
                         <td class="border px-4 py-2">{{ $blog->id }}</td>
                         <td class="border px-4 py-2">{{ $blog->title }}</td>
+                        <td class="border px-4 py-2">{{ $blog->author ? $blog->author->name : 'Autoriaus sistemoje nebėra' }}</td>
                         <td class="border px-4 py-2">
                         <button wire:click="approve({{ $blog->id }}, '{{ $blog->title }}')" class="disabled:opacity-50 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"@cannot('confirm', $blog) disabled @endcannot>Publikuoti</button>
                         <button wire:click="edit({{ $blog->id }})" class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"@cannot('update', $blog) disabled @endcannot>Redaguoti</button>
@@ -42,6 +45,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $blogs->links() }}
         </div>
     </div>
 </div>
