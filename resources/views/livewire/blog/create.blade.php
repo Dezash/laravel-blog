@@ -39,8 +39,43 @@
             @endforeach
 
             <div class="mt-4">
-                <x-jet-label for="blogBody" value="Tekstas" />
-                <textarea wire:model="body" rows="10" id="blogBody" class="block mt-1 w-full" name="body" required></textarea>
+                <x-jet-label value="Turinys" />
+                @push('styles')
+                <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+                @endpush
+                @push('scripts')
+                <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+                @endpush
+
+                <script>
+                    function quillEditor(data) {
+                        return {
+                            instance: null,
+                            init() {
+                                this.$nextTick(() => {
+                                    this.instance = new Quill(this.$refs.editor, {
+                                        theme: 'snow'
+                                    });
+
+                                    this.instance.on('text-change', () => {
+                                        this.$refs.input.dispatchEvent(new CustomEvent('input', {
+                                            detail: this.instance.root.innerHTML
+                                        }));
+                                    })
+                                })
+                            },
+                            ...data
+                        }
+                    }
+                </script>
+
+                <div x-data="quillEditor({})" x-init="init()">
+                    <input type="hidden" x-ref="input" wire:model="body">
+
+                    <div wire:ignore>
+                        <div x-ref="editor">{!! $body !!}</div>
+                    </div>
+                </div>
             </div>
 
             <div class="flex items-center justify-end mt-4">
