@@ -2,6 +2,10 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Straipsniai
     </h2>
+
+    @if (session()->has('message'))
+    <script>toastr['success']('{{session("message")}}', 'success');</script>
+    @endif
 </x-slot>
 <div class="py-12">
     <!-- Topic Nav -->

@@ -31,5 +31,6 @@ class UserList extends Component
             abort(401);
 
         $userToDelete->delete();
+        $this->emit('alert', ['type' => 'success', 'message' => 'Vartotojas pašalintas']);
     }
 }

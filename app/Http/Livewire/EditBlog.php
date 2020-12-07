@@ -73,6 +73,7 @@ class EditBlog extends Component
             }
         }
 
+        session()->flash('message', 'Staipsnis išsaugotas.');
         return redirect()->route('blog');
     }
 

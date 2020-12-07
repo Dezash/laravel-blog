@@ -49,6 +49,7 @@ class PostBlog extends Component
             ]);
         }
 
+        session()->flash('message', 'Staipsnis pateiktas.');
         return redirect()->route('blog');
     }
 
