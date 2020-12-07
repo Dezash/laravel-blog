@@ -1,10 +1,10 @@
 <x-jet-form-section submit="createTeam">
     <x-slot name="title">
-        {{ __('Team Details') }}
+        {{ __('Komandos ypatybės') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Create a new team to collaborate with others on projects.') }}
+        {{ __('Čia galite sukurti naują komandą.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -30,7 +30,7 @@
 
     <x-slot name="actions">
         <x-jet-button>
-            {{ __('Create') }}
+            {{ __('Sukurti') }}
         </x-jet-button>
     </x-slot>
 </x-jet-form-section>

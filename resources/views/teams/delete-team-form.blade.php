@@ -1,40 +1,40 @@
 <x-jet-action-section>
     <x-slot name="title">
-        {{ __('Delete Team') }}
+        {{ __('Ištrinti Komandą') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Permanently delete this team.') }}
+        {{ __('Visam laikui ištrinti komandą') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            {{ __('Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.') }}
+            {{ __('Kai komanda ištrinama, visi jos resūrsai dings visam laikui.') }}
         </div>
 
         <div class="mt-5">
             <x-jet-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                {{ __('Delete Team') }}
+                {{ __('Ištrinti Komandą') }}
             </x-jet-danger-button>
         </div>
 
         <!-- Delete Team Confirmation Modal -->
         <x-jet-confirmation-modal wire:model="confirmingTeamDeletion">
             <x-slot name="title">
-                {{ __('Delete Team') }}
+                {{ __('Ištrinti Komandą') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.') }}
+                {{ __('Ar esate tikri, kad norite ištrinti šia komandą?') }}
             </x-slot>
 
             <x-slot name="footer">
                 <x-jet-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                    {{ __('Nevermind') }}
+                    {{ __('Apsigalvojau') }}
                 </x-jet-secondary-button>
 
                 <x-jet-danger-button class="ml-2" wire:click="deleteTeam" wire:loading.attr="disabled">
-                    {{ __('Delete Team') }}
+                    {{ __('Ištrinti Komandą') }}
                 </x-jet-danger-button>
             </x-slot>
         </x-jet-confirmation-modal>

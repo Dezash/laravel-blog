@@ -1,10 +1,10 @@
 <x-jet-form-section submit="updateTeamName">
     <x-slot name="title">
-        {{ __('Team Name') }}
+        {{ __('Komandos Pavadinimas') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('The team\'s name and owner information.') }}
+        {{ __('Komandos pavadinimas ir savininko informacija.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -39,11 +39,11 @@
     @if (Gate::check('update', $team))
         <x-slot name="actions">
             <x-jet-action-message class="mr-3" on="saved">
-                {{ __('Saved.') }}
+                {{ __('Išsaugota.') }}
             </x-jet-action-message>
 
             <x-jet-button>
-                {{ __('Save') }}
+                {{ __('Išsaugoti') }}
             </x-jet-button>
         </x-slot>
     @endif

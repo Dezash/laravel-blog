@@ -22,13 +22,10 @@ use App\Http\Livewire\Post;
 
 Route::get('/', Blogs::class);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
+Route::middleware(['auth:sanctum', 'verified'])->get('blog', Blogs::class)->name('blog')->middleware('auth');
 
 
 Route::get('blog/admin', BlogAdmin::class)->name('blogadmin')->middleware('auth');
-Route::get('blog', Blogs::class)->name('blog');
 Route::get('blog/post', PostBlog::class)->name('postblog')->middleware('auth');
 Route::get('blog/edit/{id}', EditBlog::class)->name('editblog')->middleware('auth');
 Route::get('blog/{id}', Post::class)->name('post')->middleware('auth');
