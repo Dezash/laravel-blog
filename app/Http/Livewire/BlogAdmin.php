@@ -52,6 +52,6 @@ class BlogAdmin extends Component
             abort(401);
 
         $blog->delete();
-        session()->flash('message', 'Staipsnis sėkmingai ištrintas.');
+        $this->emit('alert', ['type' => 'success', 'message' => 'Staipsnis sėkmingai ištrintas.']);
     }
 }
